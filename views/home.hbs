@@ -1,0 +1,60 @@
+{{#if deletedEmployee}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{deletedEmployee}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+
+<div class="container">
+  <div class="row d-flex">
+    <div class="col-6"><h1>Baza pracowników</h1></div>
+    <div class="col-6 d-flex align-items-center justify-content-end">
+      <a href="/add" type="button" class="btn btn-primary d-flex align-items-center justify-content-center" style="height:40px; width:180px">+ Dodaj pracownika</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end ">
+      <a href="/viewdeleted" type="button" class="btn btn-danger d-flex align-items-center justify-content-center"  style="height:40px; width:180px">Zobacz usuniętych</a>
+    </div>
+  </div>
+  
+  <table class="table">
+  <tbody></tbody>
+  </table>
+
+  <table class="table table-bordered table-sm align-middle">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th scope="col">Id</th>
+        <th scope="col">Nr osobowy</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Nr telefonu</th>
+        <th scope="col">Email</th>
+        <th scope="col">Funkcja</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each rows}}
+      <tr class="text-center">
+        <td>{{this.id}}</td>
+        <td>{{this.nr_osobowy}}</td>
+        <td>{{this.imie}}</td>
+        <td>{{this.nazwisko}}</td>
+        <td>{{this.nr_telefonu1}}</td>
+        <td>{{this.email}}</td>
+        
+        
+        <td>
+            <a href="viewemployee/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-eye"></i>Podgląd</a>
+            <a href="/edit/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-pencil"></i>Edycja</a>
+            <a href="/delete/{{this.id}}" type="button" class="btn btn-light btn-small"><i class="bi bi-person-x"></i>Usuń</a>
+        </td>
+      </tr> 
+    {{/each}}
+
+    </tbody>
+  </table>
+</div>  

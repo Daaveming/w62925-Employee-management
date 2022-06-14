@@ -1,0 +1,1 @@
+CREATE TABLE `eams_app`.`employees` ( `id` INT NOT NULL AUTO_INCREMENT , `nr_osobowy` INT NOT NULL , `imie` VARCHAR(50) NOT NULL , `nazwisko` INT(50) NOT NULL , `nr_telefonu` VARCHAR(15) NOT NULL , `email` VARCHAR(50) NOT NULL , `status` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB; 

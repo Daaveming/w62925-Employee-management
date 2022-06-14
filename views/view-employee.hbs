@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Podgląd pracownika</li>
+    </ol>
+    </nav>
+
+    <div class="view-employee p-5">
+
+        {{#each rows}}
+        <div class="row mb-5">
+            <div class="col text-center">
+                <h3>{{this.imie}} {{this.nazwisko}}</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nr osobowy</th>
+                            <th scope="col">Imię</th>
+                            <th scope="col">Nazwisko</th>
+                            <th scope="col">Nr telefonu 1</th>
+                            <th scope="col">Nr telefonu 2</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Dział</th>
+                            <th scope="col">Stanowisko</th>
+                            <th scope="col">Data zatrudnienia</th>
+                            <th scope="col">Data zwolnienia</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Komentarz</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{this.id}}</th>
+                            <td>{{this.imie}}</td>
+                            <td>{{this.nazwisko}}</td>
+                            <td>{{this.nr_telefonu1}}</td>
+                            <td>{{this.nr_telefonu2}}</td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.dzial}}</td>
+                            <td>{{this.stanowisko}}</td>
+                            <td>{{this.data_zatrudnienia}}</td>
+                            <td>{{this.data_zwolnienia}}</td>
+                            <td>{{this.status}}</td>
+                            <td>{{this.komentarz}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {{/each}}
+
+
+    </div>
+</div>

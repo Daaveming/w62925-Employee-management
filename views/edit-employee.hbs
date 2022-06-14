@@ -1,0 +1,112 @@
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edycja pracownika</li>
+  </ol>
+</nav>
+
+{{#if alert}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{alert}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/if}}
+
+{{#each rows}}
+<form class="row g-3 needs-validation" method="POST" action="/edit/{{this.id}}" novalidate>
+
+    <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" value="{{this.nr_osobowy}}" placeholder="numer osobowy" name="nr_osobowy" required>
+                <label for="floatingInput">Numer osobowy</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" value="{{this.imie}}" placeholder="imię" name="imie" required>
+                <label for="floatingInput">Imię</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" value="{{this.nazwisko}}" placeholder="nazwisko" name="nazwisko" required>
+                <label for="floatingInput">Nazwisko</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" value="{{this.nr_telefonu1}}" placeholder="nr telefonu1" name="nr_telefonu1" required>
+                <label for="floatingInput">Numer telefonu</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" value="{{this.nr_telefonu2}}" placeholder="nr telefonu2" name="nr_telefonu2" required>
+                <label for="floatingInput">Numer telefonu2</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" value="{{this.email}}" placeholder="email@email.com" name="email" required>
+                <label for="floatingInput">Email</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                {{!-- <input type="text" class="form-control" id="floatingInput" value="{{this.dzial}}" placeholder="dzial" name="dzial" required>
+                <label for="floatingInput">Dział</label> --}}
+                <select class="form-select" aria-label="Default select example" name="dzial" required>
+                  {{#each ../dzialy}}
+                    <option value="{{this.id}}">{{this.nazwa}}</option>
+                  {{/each}}  
+                </select>
+                <label for="floatingInput">Dział</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                
+                <select class="form-select" aria-label="Default select example" name="status" required>
+                    <option value="Aktywny">Aktywny</option>
+                    <option value="Usunieto">Usunięto</option>
+                </select>
+                <label for="floatingInput">Status</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                {{!-- <input type="text" class="form-control" id="floatingInput" value="{{this.status}}" placeholder="status" name="status" required> --}}
+                <select class="form-select" aria-label="Default select example" name="stanowisko" required>
+                  {{#each ../stanowiska}}
+                    <option value="{{this.id}}">{{this.nazwa}}</option>
+                  {{/each}}  
+                </select>
+                <label for="floatingInput">Stanowisko</label>
+            </div>
+        </div>
+        {{!-- <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" value="{{this.data_zatrudnienia}}" placeholder="Data zatrudnienia" name="data_zatrudnienia" required>
+                <label for="floatingInput">Data zatrudnienia</label>
+            </div>
+        </div> --}}
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" value="{{this.data_zwolnienia}}" placeholder="Data zwolnienia" name="data_zwolnienia" required>
+                <label for="floatingInput">Data zwolnienia</label>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="floatingInput" placeholder="Komentarz" name="komentarz">{{this.komentarz}}</textarea>
+                <label for="floatingInput">Komentarz</label>
+            </div>
+        </div>
+        <div class="col-12 d-grid justify-content-end" >
+            <button class="btn btn-primary" type="submit">Zatwierdź</button>
+        </div>
+
+</form>
+
+{{/each}}
