@@ -1,0 +1,172 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Czas generowania: 14 Cze 2022, 18:53
+-- Wersja serwera: 10.4.24-MariaDB
+-- Wersja PHP: 8.1.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Baza danych: `pracownicy`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `dzialy`
+--
+
+CREATE TABLE `dzialy` (
+  `id` int(11) NOT NULL,
+  `nazwa` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `dzialy`
+--
+
+INSERT INTO `dzialy` (`id`, `nazwa`) VALUES
+(1, 'HR'),
+(2, 'Księgowość'),
+(3, 'Zakupy'),
+(4, 'Jakość'),
+(5, 'Produkcja'),
+(6, 'IT'),
+(7, 'Konstrukcja'),
+(8, 'UR');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `pracownicy`
+--
+
+CREATE TABLE `pracownicy` (
+  `id` int(11) NOT NULL,
+  `nr_osobowy` int(11) NOT NULL,
+  `imie` varchar(50) NOT NULL,
+  `nazwisko` varchar(50) NOT NULL,
+  `nr_telefonu1` varchar(9) NOT NULL,
+  `nr_telefonu2` varchar(12) DEFAULT NULL,
+  `email` varchar(50) NOT NULL,
+  `id_dzialu` int(50) NOT NULL,
+  `id_stanowisko` int(50) NOT NULL,
+  `data_zatrudnienia` date NOT NULL,
+  `data_zwolnienia` date DEFAULT NULL,
+  `status` varchar(40) NOT NULL,
+  `komentarz` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `pracownicy`
+--
+
+INSERT INTO `pracownicy` (`id`, `nr_osobowy`, `imie`, `nazwisko`, `nr_telefonu1`, `nr_telefonu2`, `email`, `id_dzialu`, `id_stanowisko`, `data_zatrudnienia`, `data_zwolnienia`, `status`, `komentarz`) VALUES
+(3, 100, 'Pete', 'Mitchell', '999 111 3', '333 444 555', 'pete.mitchel@topgun.com', 2, 14, '2022-05-01', '0000-00-00', 'Aktywny', 'asfd dsaf '),
+(4, 101, 'Morfeusz', 'Kowalski', '999 333 5', '0', 'morpheus@matrix.com', 6, 14, '2016-06-01', NULL, 'Aktywny', NULL),
+(5, 303, 'John ', 'Constantine', '777 333 9', '233333222', 'john.constantine@dc.com', 4, 19, '2022-02-07', NULL, 'Aktywny', NULL),
+(6, 777, 'Gal ', 'Gadot', '333 333 1', '123 988 000', 'galaga@ww.com', 4, 21, '2021-07-17', NULL, '', NULL),
+(12, 4365, 'Novak', 'Djokovic', '235 235 2', '', 'nowak@nowak.com', 1, 1, '2022-06-01', '0000-00-00', 'Usunięto', 'asfd'),
+(13, 2354, 'Leo', 'Messi', '234 222 4', '111 222 333', 'messi@argentyna.com', 1, 1, '2022-06-07', '0000-00-00', 'Aktywny', 'awgt waeew');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `stanowiska`
+--
+
+CREATE TABLE `stanowiska` (
+  `id` int(11) NOT NULL,
+  `nazwa` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `stanowiska`
+--
+
+INSERT INTO `stanowiska` (`id`, `nazwa`) VALUES
+(1, 'Kierownik HR'),
+(2, 'Pay roll specialist'),
+(3, 'Sekretarka'),
+(4, 'Kierownik produkcji'),
+(5, 'Mistrz produkcji'),
+(6, 'Brygadzista'),
+(7, 'Operator maszyn CNC'),
+(8, 'Kierownik UR'),
+(9, 'Mistrz UR'),
+(10, 'Brygadzista'),
+(11, 'Elektromechanik'),
+(12, 'Mechanik'),
+(13, 'Junior Front developer'),
+(14, 'Senior Front Developer'),
+(15, 'Kierownik IT'),
+(16, 'Programista '),
+(17, 'Informatyk'),
+(18, 'Specjalista ds. Sieci'),
+(19, 'Metrolog'),
+(20, 'Inżynier Jakości'),
+(21, 'Starszy inżynier Jakości'),
+(22, 'Starszy metrolog');
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `dzialy`
+--
+ALTER TABLE `dzialy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `pracownicy`
+--
+ALTER TABLE `pracownicy`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_sp` (`id_stanowisko`),
+  ADD KEY `fk_pd` (`id_dzialu`);
+
+--
+-- Indeksy dla tabeli `stanowiska`
+--
+ALTER TABLE `stanowiska`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT dla zrzuconych tabel
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `dzialy`
+--
+ALTER TABLE `dzialy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT dla tabeli `pracownicy`
+--
+ALTER TABLE `pracownicy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT dla tabeli `stanowiska`
+--
+ALTER TABLE `stanowiska`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `pracownicy`
+--
+ALTER TABLE `pracownicy`
+  ADD CONSTRAINT `fk_pd` FOREIGN KEY (`id_dzialu`) REFERENCES `dzialy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sp` FOREIGN KEY (`id_stanowisko`) REFERENCES `stanowiska` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
