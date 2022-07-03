@@ -93,6 +93,7 @@ exports.create = (req, res) => {
     (err, rows) => {
     // when have connection, release 
     connection.release();
+    console.log();
        
     if(!err) {
         res.render('add-employee', {alert: 'Poymyślnie dodano nowego pracownika'});
